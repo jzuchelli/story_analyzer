@@ -1,0 +1,11 @@
+[project]
+name = "story-analyzer"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.136.1",
+    "rg>=0.0.76",
+    "torch>=2.0.0",
+    "transformers>=4.57.0",
+    "uvicorn>=0.46.0",
+]
