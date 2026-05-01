@@ -409,6 +409,54 @@ textarea:focus {
   font-weight: 700;
 }
 
+.floating-progress {
+  position: fixed;
+  right: 24px;
+  top: 24px;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 20px;
+  align-items: center;
+  width: min(720px, calc(100vw - 32px));
+  border: 1px solid rgba(15, 123, 108, 0.28);
+  border-radius: 8px;
+  padding: 28px 32px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 18px 42px rgba(24, 32, 29, 0.18);
+}
+
+.floating-progress span {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.floating-progress strong {
+  display: block;
+  overflow-wrap: anywhere;
+  color: var(--text);
+  font-size: 1.45rem;
+}
+
+.loading-spinner {
+  width: 56px;
+  aspect-ratio: 1;
+  border: 5px solid rgba(15, 123, 108, 0.18);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (max-width: 960px) {
   .app-shell {
     padding: 20px;
@@ -451,5 +499,21 @@ textarea:focus {
   .suggestions-panel,
   .examples-panel {
     padding: 18px;
+  }
+
+  .floating-progress {
+    right: 14px;
+    top: 14px;
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .floating-progress strong {
+    font-size: 1.08rem;
+  }
+
+  .loading-spinner {
+    width: 42px;
   }
 }

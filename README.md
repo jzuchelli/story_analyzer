@@ -2,6 +2,26 @@
 
 Story Analyzer is a local web app for checking Azure DevOps-style user stories before work starts. It validates a story against rule-based readiness checks, runs Hugging Face zero-shot classification, and streams partial results back to the UI as validation work completes.
 
+## Images
+
+Add screenshots to `docs/images/` so readers can preview the app before running it locally.
+
+Suggested screenshots:
+
+- `docs/images/story-input.png` - Story entry form before validation
+- `docs/images/validation-progress.png` - Floating progress indicator while AI validation is running
+- `docs/images/validation-results.png` - Final score, readiness checks, suggestions, and Hugging Face classification
+
+After adding screenshots, they will render here:
+
+![Story input form](docs/images/story-input.png)
+
+![Validation progress indicator](docs/images/validation-progress.png)
+
+![Validation results](docs/images/validation-results.png)
+
+![Story suggestions](docs/images/story-suggestions.png)
+
 ## Prerequisites
 
 Before setting up the project, confirm that Git, Python, Node.js, npm, and uv are available.

@@ -61,6 +61,7 @@ export default function Home() {
   const [result, setResult] = useState<StoryValidationResponse | null>(null);
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [progressStep, setProgressStep] = useState("");
 
   const failedChecks = useMemo(
     () => result?.checks.filter((check) => !check.passed) ?? [],
@@ -84,6 +85,7 @@ export default function Home() {
     event.preventDefault();
     setError("");
     setIsSubmitting(true);
+    setProgressStep("Starting validation");
 
     try {
       const payload = {
@@ -103,6 +105,7 @@ export default function Home() {
 
       await validateStoryStream(payload, (event) => {
         if (event.type === "rules_complete") {
+          setProgressStep("Running AI validation");
           setResult((currentResult) => ({
             readyForWork: false,
             score: 0,
@@ -115,6 +118,7 @@ export default function Home() {
         }
 
         if (event.type === "ai_complete") {
+          setProgressStep("Calculating final score");
           setResult((currentResult) => ({
             readyForWork: false,
             score: 0,
@@ -131,9 +135,11 @@ export default function Home() {
 
         if (event.type === "final") {
           setResult(event.result);
+          setProgressStep("");
         }
       });
     } catch (caughtError) {
+      setProgressStep("");
       setError(
         caughtError instanceof Error
           ? caughtError.message
@@ -150,6 +156,7 @@ export default function Home() {
     setDependenciesText(listToText(example.dependencies));
     setResult(null);
     setError("");
+    setProgressStep("");
   }
 
   return (
@@ -273,6 +280,7 @@ export default function Home() {
                 setDependenciesText("");
                 setResult(null);
                 setError("");
+                setProgressStep("");
               }}
             >
               Reset
@@ -400,6 +408,20 @@ export default function Home() {
           </section>
         </div>
       </section>
+
+      {isSubmitting ? (
+        <div
+          className="floating-progress"
+          aria-live="polite"
+          aria-label="Validation progress"
+        >
+          <span className="loading-spinner" aria-hidden="true" />
+          <div>
+            <span>Processing</span>
+            <strong>{progressStep || result?.status || "Validating"}</strong>
+          </div>
+        </div>
+      ) : null}
     </main>
   );
 }
