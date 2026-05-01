@@ -1,0 +1,31 @@
+# Test your FastAPI endpoints
+
+GET http://127.0.0.1:8000/
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/health
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:8000/validate-story
+Content-Type: application/json
+Accept: application/json
+
+{
+  "title": "Example Story",
+  "story": "This is a short example story.",
+  "acceptanceCriteria": [],
+  "priority": "",
+  "estimate": "",
+  "dependencies": []
+}
+
+###
+
+GET http://127.0.0.1:8000/hello/User
+Accept: application/json
+
+###
